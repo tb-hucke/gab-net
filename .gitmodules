@@ -1,0 +1,4 @@
+[submodule "gab-net/gab-net"]
+	path = gab-net/gab-net
+	url = git@github.com:gab-net/gab-net.git
+	branch = gab-net
