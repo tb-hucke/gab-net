@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # See LICENSE file for full copyright and licensing details.
 
 import logging
@@ -9,10 +10,8 @@ import werkzeug.utils
 from odoo import http
 from odoo.http import request
 from odoo.addons.auth_oauth.controllers.main import OAuthLogin as Home
-from odoo.addons.web.controllers.main import\
-    set_cookie_and_redirect, login_and_redirect
-from odoo.addons.auth_oauth.controllers.main import\
-    fragment_to_query_string
+from odoo.addons.web.controllers.main import set_cookie_and_redirect, login_and_redirect
+from odoo.addons.auth_oauth.controllers.main import fragment_to_query_string, OAuthLogin
 
 _logger = logging.getLogger(__name__)
 
@@ -105,20 +104,19 @@ class OAuthController(http.Controller):
             return login_and_redirect(*credentials,
                                       redirect_url=root_url + 'web?')
         except AttributeError:
-            _logger.error(
-                "auth_signup not installed on"
-                " database %s: oauth sign up cancelled." % (
-                    request.cr.dbname))
-            url = "/web/login?oauth_error=1"
+                _logger.error(
+                    "auth_signup not installed on"
+                    " database %s: oauth sign up cancelled." % (
+                        request.cr.dbname))
+                url = "/web/login?oauth_error=1"
         except odoo.exceptions.AccessDenied:
-            _logger.info(
-                'OAuth2: access denied,'
-                ' redirect to main page in case a valid'
-                ' session exists, without setting cookies')
-            url = "/web/login?oauth_error=3"
-            redirect = werkzeug.utils.redirect(url, 303)
-            redirect.autocorrect_location_header = False
-            return redirect
+                _logger.info('OAuth2: access denied,'
+                             ' redirect to main page in case a valid'
+                             ' session exists, without setting cookies')
+                url = "/web/login?oauth_error=3"
+                redirect = werkzeug.utils.redirect(url, 303)
+                redirect.autocorrect_location_header = False
+                return redirect
         except Exception as e:
             _logger.exception("OAuth2: %s" % str(e))
             url = "/web/login?oauth_error=2"
