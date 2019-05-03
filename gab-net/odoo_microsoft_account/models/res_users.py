@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 # See LICENSE file for full copyright and licensing details.
 
-from odoo import api, fields, models
+import odoo
+from odoo import api, fields, models, _
 from odoo.exceptions import AccessDenied, UserError
 from odoo.addons.auth_signup.models.res_users import SignupError
 
@@ -60,4 +62,5 @@ class ResUsers(models.Model):
         login = self._microsoft_auth_oauth_signin(provider, params)
         if not login:
             raise AccessDenied()
+        # return user credentials
         return self._cr.dbname, login, access_token

@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-
 # See LICENSE file for full copyright and licensing details.
 
 import urllib
 import simplejson
 from odoo.http import request
-from odoo import fields, models
+from odoo import api, fields, models, _
 
 
 class AuthOauthProvider(models.Model):
