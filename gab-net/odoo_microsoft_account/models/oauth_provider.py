@@ -23,6 +23,7 @@ class AuthOauthProvider(models.Model):
                 'web.base.url') + '/auth_oauth/microsoft/signin',
             client_id=oauth_provider_rec.client_id,
             client_secret=oauth_provider_rec.secret_key,
+            resource='https://graph.microsoft.com/'
         )
         if code:
             data.update({'code': code})
