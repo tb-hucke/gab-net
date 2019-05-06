@@ -14,6 +14,6 @@
         'data/auth_oauth_data.xml',
     ],
     'demo': [],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
 }
