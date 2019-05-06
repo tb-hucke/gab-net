@@ -3,7 +3,7 @@
 
 {
     'name': 'Microsoft Users - Odoo Integration Base Module',
-    'version': '12.0.1.0.0',
+    'version': '11.0.1.0.0',
     'category': 'Extra Tools',
     'author': 'Serpent Consulting Services Pvt. Ltd.',
     'website': 'https://www.serpentcs.com',
@@ -14,8 +14,6 @@
         'data/auth_oauth_data.xml',
     ],
     'demo': [],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
-    'price': 199,
-    'currency': 'EUR'
 }
