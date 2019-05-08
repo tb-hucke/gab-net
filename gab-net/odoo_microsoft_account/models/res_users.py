@@ -41,9 +41,15 @@ class ResUsers(models.Model):
             if not users:
                 raise AccessDenied()
             assert len(users.ids) == 1
+           # users.sudo().write({
+           #     'oauth_access_token': params['access_token'],
+            #    'groups_id': [(6, 0, [self.env.ref('base.group_user').id])],
+            #    'microsoft_refresh_token': params['microsoft_refresh_token']})
+            groups = [self.env.ref('base.group_user').id] + \
+                     users.groups_id.ids
             users.sudo().write({
                 'oauth_access_token': params['access_token'],
-                'groups_id': [(6, 0, [self.env.ref('base.group_user').id])],
+                'groups_id': [(6, 0, groups)],
                 'microsoft_refresh_token': params['microsoft_refresh_token']})
             return users.login
         except AccessDenied as access_denied_exception:
